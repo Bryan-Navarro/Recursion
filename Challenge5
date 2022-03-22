@@ -1,0 +1,81 @@
+package recurseproj;
+import java.util.Scanner;
+/**
+ * Title: Challenge#5 - Recursion
+ * 
+ * Semester : COP3804 - Spring 2022
+ * Lecturer's Name: Prof Charter's
+ * This project shows how to use a recursive method.I have made a base method and a recursive method to show the 
+ * different ways we can get to the same end.
+ * @author bryan
+ */
+public class RecurseProj {
+
+    /**
+     * The main method uses a do while loop to ask the user for input and it will then send the word to the base and
+     * recursive method to check if it has any X letters in the word and be replaced with a Y. Those methods will then 
+     * send the words back after being altered or not if there were no X's in the word to be printed out by the main method.
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner s = new Scanner(System.in);
+        String str = " ";
+        String baseWord = " ";
+        String recursWord = " ";
+        String again;
+        do {
+        System.out.println("Please put in a word that you wish to switch the X's with a Y.");
+        str = s.nextLine();
+        baseChangeXY(str);
+        baseWord = baseChangeXY(str);
+        System.out.println("BASE METHOD");
+        System.out.println("baseChangeXY(" + str + ") ---------> " + baseWord);
+        changeXY(str);
+        recursWord = changeXY(str);
+        System.out.println("RECURSIVE METHOD");
+        System.out.println("changeXY(" + str + ") ---------> " + recursWord);
+            System.out.println(" ");
+            System.out.println("Do you wish to put another word in?");
+            again = s.nextLine();
+        }while (again.equalsIgnoreCase("yes"));
+    }
+    /**
+     * This method is the base method to change the letters in a word. I used the replace method to just replace 
+     * the X's with Y's and then have a new variable contain that word and return it to the main method.
+     * @param aStr
+     * @return 
+     */
+    public static String baseChangeXY(String aStr){
+        
+        String newStr;
+        newStr = aStr.replace("x","y");
+        return newStr;
+        
+    }
+    
+    /**
+     * This is the recursive method. It receives the string that the user input and then uses an if-else method
+     * to go through the string. If there is no X found, then it will return the word as it is. If there is an 
+     * X found, it will replace it with a Y and return the new word.
+     * @param str
+     * @return 
+     */
+    public static String changeXY(String str){
+    String reStr;
+    if(str.length() == 0){
+        reStr = str;
+        return reStr;
+    } else {
+    
+        if(str.charAt(0) == 'x'){
+        
+            return 'y' + changeXY(str.substring(1));
+        }
+        return str.charAt(0) + changeXY(str.substring(1));
+    }
+    
+    
+    
+    }
+}
